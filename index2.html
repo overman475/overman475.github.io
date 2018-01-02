@@ -14,8 +14,8 @@
 <body>
 <h3>Simple Storage dApp 예제</h3>
 <ul>
-  <li>컨트랙트 주소: <span id="contractAddr"></span></li>  
-  <button onclick="getValue()">계약 주소 변경하기</button> 
+  <li>컨트랙트 주소: <span id="contractAddr"></span> <button onclick="changeValue()">계약 주소 변경하기</button>  </li>  
+  
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
   <li>컨트랙트에 저장된 값: <span id="storedData"></span>
     <button onclick="getValue()">새로고침</button> (현재블록: <span id="lastBlock"></span>)</li>
@@ -38,6 +38,7 @@ var contractAddress = '0x339a4cF3AEbEB880dBE137D9495304E098B43c9d';
 var abi = [{"constant":false,"inputs":[{"name":"x","type":"uint256"}],"name":"set","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"}];
 var simpleStorageContract;
 var simpleStorage;
+var change;
 
 window.addEventListener('load', function() {
 
@@ -68,6 +69,11 @@ function startApp() {
 function getLink(addr) {
   return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr +'</a>';
 }
+
+function changeValue() {
+	change = prompt(" 변경할 계약주소를 입력해 주세요 ");
+	contractAddress = change;
+};
 
 function getValue() {
   simpleStorage.get(function(e,r){
